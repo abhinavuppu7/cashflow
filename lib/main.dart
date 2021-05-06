@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:cashflow/Homescreen.dart';
+import 'file:///C:/Users/ABHINAV/AndroidStudioProjects/cashflow/lib/screens/Homescreen.dart';
 void main() {
   runApp(MyApp());
 }
@@ -10,6 +10,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.green,
+      ),
 
       home: Homescreen(),
     );
