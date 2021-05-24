@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:cashflow/datamodels/tranasactionmodel.dart';
 class AddTransaction extends StatefulWidget {
   final Function UpdateTransactionList;
+  final Function UpdateAmount;
+
   final Transactions transaction;
-  AddTransaction({this.UpdateTransactionList,this.transaction});
+  AddTransaction({this.UpdateTransactionList,this.UpdateAmount,this.transaction});
   @override
   _AddTransactionState createState() => _AddTransactionState();
 }
@@ -20,6 +22,7 @@ class _AddTransactionState extends State<AddTransaction> {
             {
               _transactiontype=widget.transaction.transactiontype;
               _amount=widget.transaction.amount;
+              _description=widget.transaction.description;
             }
 
 
@@ -29,6 +32,7 @@ class _AddTransactionState extends State<AddTransaction> {
   final _formkey=GlobalKey<FormState>( );
   String _transactiontype='';
   int _amount=0;
+  String _description='';
   final List<String>_transactionchoices=["Income","Expense"];
 
 
@@ -36,7 +40,7 @@ class _AddTransactionState extends State<AddTransaction> {
 
     _formkey.currentState.save();
     print('$_transactiontype $_amount');
-    Transactions transaction=Transactions(transactiontype:_transactiontype,amount: _amount);
+    Transactions transaction=Transactions(transactiontype:_transactiontype,amount: _amount,description: _description);
 
     if(widget.transaction==null)
       DataBaseConnection.instance.insertTransaction(transaction);
@@ -45,6 +49,7 @@ class _AddTransactionState extends State<AddTransaction> {
 
 
     widget.UpdateTransactionList();
+    widget.UpdateAmount();
     Navigator.pop(context);
   }
 
@@ -61,7 +66,9 @@ class _AddTransactionState extends State<AddTransaction> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
+                
                 GestureDetector(
+
 
                   onTap: ()
                   {
@@ -138,6 +145,33 @@ class _AddTransactionState extends State<AddTransaction> {
                        onChanged: (value){
                          setState(() {
                            _amount=int.tryParse(value);
+                         });
+                       },
+
+
+                     ),
+                   ),
+                   Padding(
+                     padding: const EdgeInsets.symmetric(vertical: 20),
+                     child: TextFormField(
+                       style: TextStyle(
+                         fontSize: 20.0,
+                       ),
+                       decoration: InputDecoration(
+                           labelText: 'description',
+                           labelStyle: TextStyle(fontSize: 18.0),
+                           border:OutlineInputBorder(
+                             borderRadius: BorderRadius.circular(10.0),
+                           )
+
+                       ),
+
+                       validator: (input) => _transactiontype == null
+                           ? "Please Select a priority level"
+                           : null,
+                       onChanged: (value){
+                         setState(() {
+                           _description=value;
                          });
                        },
 

@@ -6,16 +6,18 @@ class Transactions{
   int id;
 
   String transactiontype;
+  String description;
 
   int amount;
 
-  Transactions ({this.amount,this.transactiontype});
- Transactions.WithID({this.id,this.amount,this.transactiontype});
+  Transactions ({this.amount,this.description,this.transactiontype});
+ Transactions.WithID({this.id,this.amount,this.description,this.transactiontype});
 
  factory Transactions.fromMap(Map<String,dynamic>map){
    return Transactions.WithID(
      id: map['id'],
      transactiontype: map['transactiontype'],
+     description: map['description'],
      amount: map['amount'],
    );
 
@@ -33,6 +35,7 @@ class Transactions{
       map['id']=id;
 
     map['transactiontype']=transactiontype;
+    map['description']=description;
     map['amount']=amount;
     return map;
   }
