@@ -67,7 +67,8 @@ class _HomescreenState extends State<Homescreen> {
       margin: EdgeInsets.only(left: 15, bottom: 15, right: 15),
       padding: EdgeInsets.only(left: 24, top: 12, bottom: 12, right: 22),
       decoration: BoxDecoration(
-        color: Color(0xfffcf1f1),
+        // color: Color(0xfffcf1f1),
+        color: Colors.white,
         borderRadius: BorderRadius.circular(15),
         boxShadow: [
           BoxShadow(
@@ -133,7 +134,7 @@ class _HomescreenState extends State<Homescreen> {
                             child: Container(
                           child: Column(
                             children: <Widget>[
-                              Text('Amount'),
+                              Text('mount'),
                               Text('${amount}')
                             ],
                           ),
